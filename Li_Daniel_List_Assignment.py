@@ -120,6 +120,7 @@ print(closeby2([1, 2, 3], [2, 3, 10]))
 print(loudVowels("I snap my fingers when I sing"))
 diagonal(8)
 print("why how what this")
+print("check")
 
 
 
