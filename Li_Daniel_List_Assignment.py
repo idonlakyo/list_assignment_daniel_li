@@ -119,7 +119,6 @@ print(after4([2, 4, 1, 2]))
 print(closeby2([1, 2, 3], [2, 3, 10]))
 print(loudVowels("I snap my fingers when I sing"))
 diagonal(8)
-there
 
 
 
