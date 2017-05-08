@@ -11,9 +11,9 @@ Created:		26/04/2017
 
 def two23(numlist):
     """
-    Takes a list of numbers and returns True if there are two 2's or three 3's
-    :param numlist: A list of integers
-    :return: True or False
+    Takes a list of numbers and returns True if there are two 2's or two 3's
+    :param numlist: list - A list of integers
+    :return: bool - True or False
     """
 
     # Initialize counter variables for the number of 2's and the number of 3's
@@ -29,7 +29,7 @@ def two23(numlist):
         elif i == 3:
             num_threes += 1
 
-    # Checking if the number of 2's is two and the number of 3's is three and returning True of False based on this
+    # Checking if the number of 2's is two and the number of 3's is three and returning True or False based on this
     if num_twos == 2 or num_threes == 2:
         return True
     else:
@@ -37,9 +37,9 @@ def two23(numlist):
 
 def after4(numlist):
     """
-    Takes a list of integers and removes everything before the last 4 in the list
-    :param numlist: a list of integers
-    :return: a new list of integers with everything after the last 4 in the original list
+    Takes a list of integers creates a new list with everything after the last 4 in the original list
+    :param numlist: list - a list of integers
+    :return: list - a new list of integers with everything after the last 4 in the original list
     """
 
     # Using a loop to find the last 4 in the list and creating a new list that has the values after the 4
@@ -53,9 +53,9 @@ def after4(numlist):
 def closeby2(nums1, nums2):
     """
     Takes two list and returns the number of times the values with the same index are within 2 of each other
-    :param nums1: A list of integers with the same length as nums2
-    :param nums2: A list of integers with the same length as nums1
-    :return: the number of times two values at the same index are within 2 of each other
+    :param nums1: list - A list of integers with the same length as nums2
+    :param nums2: list - A list of integers with the same length as nums1
+    :return: int - the number of times two values at the same index are within 2 of each other
     """
 
     # Initialize a counter for the number of times two numbers are within 2 of each other
@@ -65,7 +65,7 @@ def closeby2(nums1, nums2):
     for i in range(len(nums1)):
 
         # checking if both numbers at the same index in the two lists is within 2 of each other
-        if 0 < abs(nums1[i] - nums2[i]) < 2:
+        if 0 < abs(nums1[i] - nums2[i]) <= 2:
             differ_by_2 += 1
 
     # Returning the counter
@@ -74,8 +74,8 @@ def closeby2(nums1, nums2):
 def loudVowels(sentence):
     """
     takes a sentence and capitalizes all vowels
-    :param sentence: a string of words
-    :return: a string with all vowels capitalized
+    :param sentence: str - a string of words
+    :return: str - a string with all vowels capitalized
     """
 
     # Initialize a list of vowels and a list of the given string separated into letters
@@ -94,7 +94,7 @@ def diagonal(n):
     """
     Given a side length, print a grid with a diagonal line of 1's through the middle, 0's above the line, and 2's
     below the line
-    :param n: a positive integer
+    :param n: int - a positive integer representing the length and width of the grid
     :return: none
     """
 
@@ -114,10 +114,26 @@ def diagonal(n):
         # Printing the formatted grind line by line
         print(" ".join([str(x) for x in grid[i]]))
 
+# A.2
 print(two23([2, 2]))
+print(two23([3, 3]))
+print(two23([2, 3]))
+
+# B.3
 print(after4([2, 4, 1, 2]))
+print(after4([4, 1, 4, 2]))
+print(after4([4, 4, 1, 2, 3]))
+
+# # C.1
 print(closeby2([1, 2, 3], [2, 3, 10]))
+print(closeby2([1, 2, 3], [2, 3, 5]))
+print(closeby2([1, 2, 3], [2, 3, 3]))
+
+# D.1
 print(loudVowels("I snap my fingers when I sing"))
+
+# E.2
+diagonal(3)
 diagonal(8)
 
 
