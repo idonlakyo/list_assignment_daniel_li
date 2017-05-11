@@ -21,4 +21,3 @@ while x != len(textlist) - 1:
     x += 1
 text.seek(0)
 text.write("".join(textlist))
-pull request
