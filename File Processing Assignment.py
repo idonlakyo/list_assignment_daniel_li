@@ -18,6 +18,16 @@ while x != len(textlist) - 1:
         else:
             textlist[x] = "z"
         textlist.remove(textlist[x+1])
+    if textlist[x].lower() == "a" and textlist[x+1] == " ":
+        if textlist[x] == "A"
+            textlist[x] = "E"
+        if textlist[x] == "a":
+            textlist[x] = "e"
+        temptext = textlist[x+1:]
+        textlist[x+1] = "i"
+        textlist[x+2] = "n"
+        for i in range(len(textlist[x+3:])):
+            textlist[i-2] = templist[i]
     x += 1
 text.seek(0)
 text.write("".join(textlist))
