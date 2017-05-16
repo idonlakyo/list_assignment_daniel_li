@@ -1,4 +1,23 @@
-text = open("source.txt","r+")
+def replace_characters(text_file, replaced_word, replace_word, index):
+    if len(replace_word) > 1 or len(replaced_word) > len(replace_word):
+        front_of_list = text_file[:index]
+        back_of_list = text_file[index+len(replaced_word):]
+        if text_file[index] == replaced_word[0].upper():
+            text_file = list(front_of_list) + list(replace_word[0].upper() + replace_word[1:]) + list(back_of_list)
+
+        else:
+            text_file = list(front_of_list) + list(replace_word) + list(back_of_list)
+
+    else:
+        if text_file[index] == replaced_word.upper():
+            text_file[index] = replace_word.upper()
+
+        else:
+            text_file[index] = replace_word.lower()
+    return text_file
+
+text = open("source.txt","r")
+translated_text = open("translated.txt","w")
 textlist = []
 x = 0
 while True:
@@ -7,24 +26,36 @@ while True:
         break
     for i in range(len(textline)):
         textlist.append(textline[i])
+
 while x != len(textlist) - 1:
-    if textlist[x] == "w":
-        print("w")
-        textlist[x] = "v"
-    if textlist[x].lower() == "t" and textlist[x+1] == "h":
-        print("h")
-        if textlist[x] == "T":
-            textlist[x] = "Z"
-        else:
-            textlist[x] = "z"
-        textlist.remove(textlist[x+1])
-    if textlist[x].lower() == "a" and textlist[x+1] == " ":
-        front_of_list = textlist[:x]
-        back_of_list = textlist[x+1:]
-        if textlist[x].lower() == "A":
-            textlist = front_of_list + ['E','i','n'] + back_of_list
-        else:
-            textlist = front_of_list + ['e','i','n'] + back_of_list
+    if textlist[x].lower() == "w" and textlist[x-1] == " ":
+        textlist = replace_characters(textlist, "w", "v", x)
+
+    elif textlist[x].lower() == "g" and (textlist[x+1] == "a" or textlist[x+1] == "o"):
+        textlist = replace_characters(textlist, "g", "k", x)
+
+    elif textlist[x].lower() == "s" and textlist[x+1] != " ":
+        textlist = replace_characters(textlist, "s", "z", x)
+
+    elif textlist[x].lower() == "t" and textlist[x+1] == "h":
+        textlist = replace_characters(textlist, "th", "z", x)
+
+    elif textlist[x].lower() == "a" and textlist[x+1] == " ":
+        textlist = replace_characters(textlist, "a", "ein", x)
+
+    elif textlist[x] == "I" and textlist[x+1] == " ":
+        textlist = replace_characters(textlist, "I", "Argh! I", x)
+        x += 6
+    elif textlist[x].lower() == "p":
+        textlist = replace_characters(textlist, "p", "b", x)
+
+    elif textlist[x].lower() == "v":
+        textlist = replace_characters(textlist, "v", "f", x)
+
+    elif textlist[x].lower() == "b":
+        textlist = replace_characters(textlist, "b", "p", x)
+
+
+
     x += 1
-text.seek(0)
-text.write("".join(textlist))
+translated_text.write("".join(textlist))
