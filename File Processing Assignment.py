@@ -20,6 +20,7 @@ text = open("source.txt","r")
 translated_text = open("translated.txt","w")
 textlist = []
 x = 0
+punctuation = ['!', '.', '?']
 while True:
     textline = text.readline()
     if textline == "":
@@ -43,7 +44,7 @@ while x != len(textlist) - 1:
     elif textlist[x].lower() == "a" and textlist[x+1] == " ":
         textlist = replace_characters(textlist, "a", "ein", x)
 
-    elif textlist[x] == "I" and textlist[x+1] == " ":
+    elif textlist[x] == "I" and textlist[x+1] == " " and textlist[x-2] in punctuation:
         textlist = replace_characters(textlist, "I", "Argh! I", x)
         x += 6
     elif textlist[x].lower() == "p":
