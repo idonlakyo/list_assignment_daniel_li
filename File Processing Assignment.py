@@ -1,19 +1,12 @@
-def replace_characters(text_file, replaced_word, replace_word, index):
-    if len(replace_word) > 1 or len(replaced_word) > len(replace_word):
-        front_of_list = text_file[:index]
-        back_of_list = text_file[index+len(replaced_word):]
-        if text_file[index] == replaced_word[0].upper():
-            text_file = list(front_of_list) + list(replace_word[0].upper() + replace_word[1:]) + list(back_of_list)
-
-        else:
-            text_file = list(front_of_list) + list(replace_word) + list(back_of_list)
+def replace_characters(text_file, replaced_word, word_to_replace, index):
+    front_of_list = text_file[:index]
+    back_of_list = text_file[index+len(replaced_word):]
+    if text_file[index] == replaced_word[0].upper():
+        text_file = list(front_of_list) + list(word_to_replace[0].upper() + word_to_replace[1:]) + list(back_of_list)
 
     else:
-        if text_file[index] == replaced_word.upper():
-            text_file[index] = replace_word.upper()
+        text_file = list(front_of_list) + list(word_to_replace) + list(back_of_list)
 
-        else:
-            text_file[index] = replace_word.lower()
     return text_file
 
 text = open("source.txt","r")
