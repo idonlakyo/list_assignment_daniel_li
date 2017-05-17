@@ -34,7 +34,7 @@ while x != len(textlist) - 1:
     elif textlist[x].lower() == "g" and (textlist[x+1] == "a" or textlist[x+1] == "o"):
         textlist = replace_characters(textlist, "g", "k", x)
 
-    elif textlist[x].lower() == "s" and textlist[x+1] != " ":
+    elif textlist[x].lower() == "s" and textlist[x+1].isalpha() == True:
         textlist = replace_characters(textlist, "s", "z", x)
 
     elif textlist[x].lower() == "t" and textlist[x+1] == "h":
