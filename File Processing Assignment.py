@@ -1,6 +1,7 @@
 def replace_characters(text_file, replaced_word, word_to_replace, index):
     front_of_list = text_file[:index]
     back_of_list = text_file[index+len(replaced_word):]
+    
     if text_file[index] == replaced_word[0].upper():
         text_file = list(front_of_list) + list(word_to_replace[0].upper() + word_to_replace[1:]) + list(back_of_list)
 
@@ -14,6 +15,7 @@ translated_text = open("translated.txt","w")
 textlist = []
 x = 0
 punctuation = ['!', '.', '?']
+
 while True:
     textline = text.readline()
     if textline == "":
