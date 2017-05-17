@@ -24,8 +24,8 @@ while True:
     textline = text.readline()
     if textline == "":
         break
-    for i in range(len(textline)):
-        textlist.append(textline[i])
+    else:
+        textlist = textlist + list(textline)
 
 while x != len(textlist) - 1:
     if textlist[x].lower() == "w" and textlist[x-1] == " ":
