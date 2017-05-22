@@ -1,57 +1,84 @@
-def replace_characters(text_file, replaced_word, word_to_replace, index):
-    front_of_list = text_file[:index]
-    back_of_list = text_file[index+len(replaced_word):]
-    
-    if text_file[index] == replaced_word[0].upper():
-        text_file = list(front_of_list) + list(word_to_replace[0].upper() + word_to_replace[1:]) + list(back_of_list)
+#-------------------------------------------------------------------------------
+# Name:		<filename>.py
+# Purpose:		Translates a given source text into english with a german accent
+#
+# Author:		Li. D
+#
+# Created:		12/05/2017
+#------------------------------------------------------------------------------
+
+
+def replace_characters(text_list, replaced_word, word_to_replace, index):
+    """
+    :param text_list: list - The list of the file that will be translated
+    :param replaced_word: str - The word going to be replaced
+    :param word_to_replace: str - The word that is going to replace a word
+    :param index: int - The index in which the word going to be replace is at
+    :return: list - The list of the file with a single translation completed
+    """
+    # Create two lists, one for everything before the word being replaced and one for everything after
+    front_of_list = text_list[:index]
+    back_of_list = text_list[index+len(replaced_word):]
+
+    # Checks if the word being replaced is capitalized
+    if text_list[index] == replaced_word[0].upper():
+        # Adds front of list and back of list with the new word capitalized
+        text_list = list(front_of_list) + list(word_to_replace[0].upper() + word_to_replace[1:]) + list(back_of_list)
 
     else:
-        text_file = list(front_of_list) + list(word_to_replace) + list(back_of_list)
+        # Does same thing but the new word is lowercase
+        text_list = list(front_of_list) + list(word_to_replace) + list(back_of_list)
 
-    return text_file
+    # Return the list with the changed word
+    return text_list
 
+# Opens the file going to be translated, initialize other needed variables
 text = open("source.txt","r")
 translated_text = open("translated.txt","w")
-textlist = []
+text_list = []
 x = 0
-punctuation = ['!', '.', '?']
 
 while True:
+    # Reads a line and checks if it is empty, if so, it breaks
     textline = text.readline()
     if textline == "":
         break
     else:
-        textlist = textlist + list(textline)
+        # Otherwise, add it to a list as letters
+        text_list += list(textline)
 
-while x != len(textlist) - 1:
-    if textlist[x].lower() == "w" and textlist[x-1] == " ":
-        textlist = replace_characters(textlist, "w", "v", x)
+# Goes through everything looking for letters/words to be replaced
+# Condition is dynamic, since length of list might change
+while x != len(text_list) - 1:
+    if text_list[x].lower() == "w" and text_list[x-1] == " ":
+        text_list = replace_characters(text_list, "w", "v", x)
 
-    elif textlist[x].lower() == "g" and (textlist[x+1] == "a" or textlist[x+1] == "o"):
-        textlist = replace_characters(textlist, "g", "k", x)
+    elif text_list[x].lower() == "g" and (text_list[x+1] == "a" or text_list[x+1] == "o"):
+        text_list = replace_characters(text_list, "g", "k", x)
 
-    elif textlist[x].lower() == "s" and textlist[x+1].isalpha() == True:
-        textlist = replace_characters(textlist, "s", "z", x)
+    elif text_list[x].lower() == "s" and text_list[x+1].isalpha() == True:
+        text_list = replace_characters(text_list, "s", "z", x)
 
-    elif textlist[x].lower() == "t" and textlist[x+1] == "h":
-        textlist = replace_characters(textlist, "th", "z", x)
+    elif text_list[x].lower() == "t" and text_list[x+1] == "h":
+        text_list = replace_characters(text_list, "th", "z", x)
 
-    elif textlist[x].lower() == "a" and textlist[x+1] == " ":
-        textlist = replace_characters(textlist, "a", "ein", x)
+    elif text_list[x].lower() == "a" and text_list[x+1] == " ":
+        text_list = replace_characters(text_list, "a", "ein", x)
 
-    elif textlist[x] == "I" and textlist[x+1] == " " and textlist[x-2] in punctuation:
-        textlist = replace_characters(textlist, "I", "Argh! I", x)
+    elif text_list[x] == "I" and text_list[x+1] == " " and text_list[x-2] in ["!", "?", "."]:
+        text_list = replace_characters(text_list, "I", "Argh! I", x)
         x += 6
-    elif textlist[x].lower() == "p":
-        textlist = replace_characters(textlist, "p", "b", x)
+    elif text_list[x].lower() == "p":
+        text_list = replace_characters(text_list, "p", "b", x)
 
-    elif textlist[x].lower() == "v":
-        textlist = replace_characters(textlist, "v", "f", x)
+    elif text_list[x].lower() == "v":
+        text_list = replace_characters(text_list, "v", "f", x)
 
-    elif textlist[x].lower() == "b":
-        textlist = replace_characters(textlist, "b", "p", x)
+    elif text_list[x].lower() == "b":
+        text_list = replace_characters(text_list, "b", "p", x)
 
-
-
+    # Add 1 to counter
     x += 1
-translated_text.write("".join(textlist))
+
+# Writes the new translated text to a new file
+translated_text.write("".join(text_list))
