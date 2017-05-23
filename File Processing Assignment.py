@@ -82,3 +82,4 @@ while x != len(text_list) - 1:
 
 # Writes the new translated text to a new file
 translated_text.write("".join(text_list))
+text.close()
