@@ -1,5 +1,8 @@
 import random
 import pyfiglet
+import sys
+import colorama
+import termcolor
 def displayHangmanBoard(phaseInt):
     """
     show the current hangman board on the screen based on the given phase
@@ -179,7 +182,13 @@ def outputResult(result):
     :param result: string
     :return:
     """
-    print(result)
+
+    from colorama import init
+    from termcolor import cprint
+    from pyfiglet import figlet_format
+
+    cprint(figlet_format(result, font='starwars'),
+           'red', 'on_white', attrs=['bold'])
 
 def playGame(word):
     """
