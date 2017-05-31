@@ -1,12 +1,13 @@
 import random
-import pyfiglet
+import sys
+
 def displayHangmanBoard(phaseInt):
     """
     show the current hangman board on the screen based on the given phase
     :param phaseInt: integer to identify the phase
     :return: none
     """
-    if phaseInt == 10:
+    if phaseInt == 0:
         print("")
         print("")
         print("")
@@ -17,7 +18,7 @@ def displayHangmanBoard(phaseInt):
         print("")
         print("")
         print("")
-    if phaseInt == 9:
+    if phaseInt == 1:
         print("|")
         print("|")
         print("|")
@@ -27,7 +28,7 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 8:
+    if phaseInt == 2:
         print("________")
         print("|")
         print("|")
@@ -38,7 +39,7 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 7:
+    if phaseInt == 3:
         print("________")
         print("|       |")
         print("|")
@@ -49,7 +50,7 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 6:
+    if phaseInt == 4:
         print("________")
         print("|       |")
         print("|     (*.*)")
@@ -71,7 +72,7 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 4:
+    if phaseInt == 6:
         print("________")
         print("|       |")
         print("|     (*.*)")
@@ -82,7 +83,7 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 3:
+    if phaseInt == 7:
         print("________")
         print("|       |")
         print("|     (*.*)")
@@ -93,7 +94,18 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 2:
+    if phaseInt == 8:
+        print("________")
+        print("|       |")
+        print("|     (*.*)")
+        print("|    o--|--o")
+        print("|       |")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+    if phaseInt == 9:
         print("________")
         print("|       |")
         print("|     (*.*)")
@@ -104,7 +116,7 @@ def displayHangmanBoard(phaseInt):
         print("|")
         print("|")
         print("|")
-    if phaseInt == 1:
+    if phaseInt == 10:
         print("________")
         print("|       |")
         print("|     (*.*)")
@@ -128,7 +140,7 @@ def askLetter(guessedLetters):
     return guess
 
 def displayBoard(wordBoard):
-    return "".join(wordBoard)
+    print('word: ' + " ".join(wordBoard))
 
 def updateBoard(currentBoard, letter, positionsList):
     """
@@ -139,8 +151,9 @@ def updateBoard(currentBoard, letter, positionsList):
     :return:
     """
     for i in positionsList:
+        print(i)
         currentBoard[i] = letter
-    return currentBoard[i]
+    return currentBoard
 
 def getWord():
     text = open("words.txt", "r")
@@ -155,24 +168,25 @@ def checkGuess(word, guessLetter):
     :return: int[] list of index positions of letter in word
     """
 
-    list_word = []
-    indexes = []
-
+    indices = []
     for i in range(len(word)):
-        list_word.append(word[i])
+        if word[i] == guessLetter:
+            indices.append(i)
+    return indices
 
-    for i in range(len(word)):
-        if guessLetter == word[i]:
-            indexes.append(i)
-
-    return indexes
 def outputResult(result):
     """
     output result to the screen
     :param result: string
     :return:
     """
-    print result
+
+    from colorama import init
+    from termcolor import cprint
+    from pyfiglet import figlet_format
+
+    cprint(figlet_format(result, font='starwars'),
+           'red', 'on_white', attrs=['bold'])
 
 def playGame(word):
     """
@@ -191,7 +205,7 @@ def playGame(word):
     # initialize wordBoard
     wordBoard = ["_"] * len(word)
 
-
+    print(" ".join(wordBoard))
     game_over = False
     won = False
 
@@ -202,6 +216,7 @@ def playGame(word):
 
         if len(positions) > 0:
             wordBoard = updateBoard(wordBoard, letter, positions)
+
         else:
             hangmanBoardInt += 1
 
@@ -216,12 +231,12 @@ def playGame(word):
             game_over = True
 
         guessedLetters.append(letter)
-        print("Guessed Letters: " + "".join(guessedLetters))
+        print("Guessed Letters: " + " ".join(guessedLetters))
 
-        if won:
+    if won:
             return "Won"
-        else:
-            return "Lost"
+    else:
+        return "Lost"
 
 def main():
 
