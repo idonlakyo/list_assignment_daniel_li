@@ -1,8 +1,6 @@
 import random
-import pyfiglet
 import sys
-import colorama
-import termcolor
+
 def displayHangmanBoard(phaseInt):
     """
     show the current hangman board on the screen based on the given phase
