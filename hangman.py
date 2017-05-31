@@ -151,7 +151,6 @@ def updateBoard(currentBoard, letter, positionsList):
     :return:
     """
     for i in positionsList:
-        print(i)
         currentBoard[i] = letter
     return currentBoard
 
@@ -185,8 +184,7 @@ def outputResult(result):
     from termcolor import cprint
     from pyfiglet import figlet_format
 
-    cprint(figlet_format(result, font='starwars'),
-           'red', 'on_white', attrs=['bold'])
+    cprint(figlet_format(result, font='starwars'),'blue', 'on_grey', attrs=['bold'])
 
 def playGame(word):
     """
